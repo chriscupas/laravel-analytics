@@ -105,6 +105,26 @@ public function boot()
 
 You can return a dynamic value like the example above, or a static value. If one isn't determined, it will just fall back to the `config('app.timezone')` value.
 
+### Dashboard Protection
+
+You can protect the analytics dashboard with authentication by enabling the protection feature in your config:
+`config/analytics.php`
+```php
+'protected' => true,
+
+// Optionally customize the protection middleware
+'protection_middleware' => [
+    'auth',
+    'can:view-analytics', // Add custom permissions if needed
+],
+```
+
+Or use environment variables:
+
+```bash
+ANALYTICS_PROTECTED=true
+```
+
 ## Laravel Nova
 
 The package comes with a dashboard and metrics for Laravel Nova.

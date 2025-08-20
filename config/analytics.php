@@ -86,4 +86,19 @@ return [
         'provider' => \AndreasElia\Analytics\RequestSessionProvider::class,
     ],
 
+    /**
+     * Dashboard Protection.
+     *
+     * Enable authentication protection for analytics dashboard.
+     */
+    'protected' => env('ANALYTICS_PROTECTED', true),
+
+    /**
+     * Protection Middleware.
+     *
+     * Middleware to apply when analytics dashboard is protected.
+     */
+    'protection_middleware' => [
+        'auth',
+    ],
 ];
