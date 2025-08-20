@@ -39,6 +39,14 @@ class AnalyticsServiceProvider extends ServiceProvider
 
     protected function routeConfig(): array
     {
+        $middleware = config('analytics.middleware', ['web']);
+
+        // Add protection middleware if enabled
+        if (config('analytics.protected', false)) {
+            $protectionMiddleware = config('analytics.protection_middleware', ['auth']);
+            $middleware = array_merge($middleware, $protectionMiddleware);
+        }
+        
         return [
             'namespace' => 'AndreasElia\Analytics\Http\Controllers',
             'prefix' => config('analytics.prefix'),
