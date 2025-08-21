@@ -11,7 +11,7 @@ Easily collect page view analytics with a beautifully simple to use dashboard.
 Install the package:
 
 ```bash
-composer require andreaselia/analytics
+composer require chriscupas/analytics
 ```
 
 Publish the config file and assets:
