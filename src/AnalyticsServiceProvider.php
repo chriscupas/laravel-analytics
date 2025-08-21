@@ -98,8 +98,8 @@ class AnalyticsServiceProvider extends ServiceProvider
 
         if ($customGroups = config('analytics.middleware_groups', [])) {
             foreach ($customGroups as $group) {
-                if (is_string($group) && Route::hasMiddlewareGroup($group)) {
-                    $middleware = array_merge($middleware, Route::getMiddlewareGroup($group));
+                if (is_string($group) && isset($this->app['router']->getMiddlewareGroups()[$group])) {
+                    $middleware = array_merge($middleware, $this->app['router']->getMiddlewareGroups()[$group]);
                 }
             }
         }
@@ -134,7 +134,7 @@ class AnalyticsServiceProvider extends ServiceProvider
         
         $validMiddleware = [];
         foreach ((array) $protectionMiddleware as $middleware) {
-            if (class_exists($middleware) || Route::hasMiddleware($middleware)) {
+            if (class_exists($middleware) || isset($this->app['router']->getMiddleware()[$middleware])) {
                 $validMiddleware[] = $middleware;
             } else {
                 logger()->warning("Analytics protection middleware '{$middleware}' not found");
