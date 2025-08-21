@@ -101,4 +101,54 @@ return [
     'protection_middleware' => [
         'auth',
     ],
+
+    /**
+     * Route Namespace.
+     *
+     * The namespace for route names (e.g., 'analytics.').
+     */
+    'route_namespace' => 'analytics.',
+
+    /**
+     * Additional Middleware.
+     *
+     * Additional middleware to apply to analytics routes.
+     */
+    'additional_middleware' => [
+        // 'api',
+        // 'verified',
+    ],
+
+    /**
+     * Middleware Groups.
+     *
+     * Laravel middleware groups to include.
+     */
+    'middleware_groups' => [
+        // 'api',
+        // 'web',
+    ],
+
+    /**
+     * Rate Limiting.
+     *
+     * Configure rate limiting for analytics routes.
+     */
+    'rate_limit' => [
+        'enabled' => false,
+        'attempts' => 60,
+        'decay_minutes' => 1,
+    ],
+
+    /**
+     * CORS Configuration.
+     *
+     * Configure CORS headers for analytics routes.
+     */
+    'cors' => [
+        'enabled' => false,
+        'allowed_origins' => ['*'],
+        'allowed_methods' => ['GET', 'POST'],
+        'allowed_headers' => ['*'],
+    ],
 ];
