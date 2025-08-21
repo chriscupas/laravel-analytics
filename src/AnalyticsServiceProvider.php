@@ -18,6 +18,10 @@ class AnalyticsServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/analytics'),
             ], 'analytics-assets');
+
+            $this->publishes([
+                __DIR__.'/../database/migrations' => database_path('migrations'),
+            ], 'analytics-migrations');
         }
 
         // Migrations
