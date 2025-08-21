@@ -46,7 +46,7 @@ class AnalyticsServiceProvider extends ServiceProvider
             $protectionMiddleware = config('analytics.protection_middleware', ['auth']);
             $middleware = array_merge($middleware, $protectionMiddleware);
         }
-        
+
         return [
             'namespace' => 'AndreasElia\Analytics\Http\Controllers',
             'prefix' => config('analytics.prefix'),

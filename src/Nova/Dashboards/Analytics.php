@@ -12,9 +12,9 @@ class Analytics extends Dashboard
     public function cards(): array
     {
         return [
-            new PageViews,
-            new UniqueUsers,
-            new Devices,
+            new PageViews(),
+            new UniqueUsers(),
+            new Devices(),
         ];
     }
 }
