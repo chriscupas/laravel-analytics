@@ -15,9 +15,9 @@ class DashboardProtectionTest extends TestCase
     public function dashboard_is_accessible_when_protection_is_disabled()
     {
         Config::set('analytics.protected', false);
-        
+
         $response = $this->get('/analytics');
-        
+
         $response->assertStatus(200);
     }
 
@@ -25,9 +25,9 @@ class DashboardProtectionTest extends TestCase
     public function dashboard_requires_authentication_when_protection_is_enabled()
     {
         Config::set('analytics.protected', true);
-        
+
         $response = $this->get('/analytics');
-        
+
         $response->assertStatus(302);
     }
 
@@ -35,10 +35,10 @@ class DashboardProtectionTest extends TestCase
     public function authenticated_user_can_access_protected_dashboard()
     {
         Config::set('analytics.protected', true);
-        
+
         $user = $this->createUser();
         $response = $this->actingAs($user)->get('/analytics');
-        
+
         $response->assertStatus(200);
     }
 
@@ -47,10 +47,10 @@ class DashboardProtectionTest extends TestCase
     {
         Config::set('analytics.protected', true);
         Config::set('analytics.protection_middleware', ['auth', 'verified']);
-        
+
         $user = $this->createUser(['email_verified_at' => null]);
         $response = $this->actingAs($user)->get('/analytics');
-        
+
         $response->assertStatus(302);
     }
 
