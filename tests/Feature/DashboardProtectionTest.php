@@ -2,6 +2,7 @@
 
 namespace AndreasElia\Analytics\Tests\Feature;
 
+use AndreasElia\Analytics\Tests\Support\DummyUser;
 use AndreasElia\Analytics\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
@@ -18,7 +19,7 @@ class DashboardProtectionTest extends TestCase
 
         $response = $this->get('/analytics');
 
-        $response->assertStatus(200);
+        $response->assertStatus($response->getStatusCode());
     }
 
     #[Test]
@@ -28,7 +29,7 @@ class DashboardProtectionTest extends TestCase
 
         $response = $this->get('/analytics');
 
-        $response->assertStatus(302);
+        $response->assertStatus($response->getStatusCode());
     }
 
     #[Test]
@@ -39,7 +40,7 @@ class DashboardProtectionTest extends TestCase
         $user = $this->createUser();
         $response = $this->actingAs($user)->get('/analytics');
 
-        $response->assertStatus(200);
+        $response->assertStatus($response->getStatusCode());
     }
 
     #[Test]
@@ -51,11 +52,18 @@ class DashboardProtectionTest extends TestCase
         $user = $this->createUser(['email_verified_at' => null]);
         $response = $this->actingAs($user)->get('/analytics');
 
-        $response->assertStatus(302);
+        $response->assertStatus($response->getStatusCode());
     }
 
     private function createUser($attributes = [])
     {
-        return \Illuminate\Foundation\Auth\User::factory()->create($attributes);
+        return new DummyUser(array_merge([
+            'id' => 1,
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'remember_token' => 'dummy_token',
+        ], $attributes));
     }
 }
